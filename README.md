@@ -1,8 +1,8 @@
 # Lumma stealer traffic analysis and snort detection
 
-**SOC Portfolio Project | Analyst: Gaurab Dahal | January 2026**
+SOC Portfolio Project | Analyst: Gaurab Dahal | January 2026
 
-> **Repository type:** This is an **evidence and documentation portfolio**. It contains analysis write-ups, screenshot evidence, Snort rules, IOC exports, and a payload decoder script. The raw PCAP is **not** included — download it separately to reproduce the analysis.
+> Repository type: This is an evidence and documentation portfolio. It contains analysis write-ups, screenshot evidence, Snort rules, IOC exports, and a payload decoder script. The raw PCAP is not included — download it separately to reproduce the analysis.
 
 ---
 
@@ -29,10 +29,10 @@
 
 Real-world malware network traffic analysis. I analyzed a Lumma Stealer capture using Wireshark and tshark, decoded the exfiltrated payloads, mapped attacker behavior to MITRE ATT&CK, and validated detection logic with Snort evidence.
 
-**Malware:** Lumma Stealer (Infostealer-as-a-Service)  
-**PCAP:** `2026-01-31-traffic-analysis-exercise.pcap` (external — not in repo)  
-**Source:** [malware-traffic-analysis.net](https://malware-traffic-analysis.net)  
-**Result:** 59 Snort alerts confirmed on PCAP replay
+Malware: Lumma Stealer (Infostealer-as-a-Service)  
+PCAP: `2026-01-31-traffic-analysis-exercise.pcap` (external — not in repo)  
+Source: [malware-traffic-analysis.net](https://malware-traffic-analysis.net)  
+Result: 59 Snort alerts confirmed on PCAP replay
 
 Screenshot evidence is organized into four folders. The full written report is in [`reports/FINAL_REPORT.md`](reports/FINAL_REPORT.md) (Markdown) and [`reports/final.docx`](reports/final.docx) (Word).
 
@@ -176,7 +176,7 @@ Because this build of Lumma skipped HTTPS, both payloads were in cleartext. Deco
 - Anti-sandbox checks: `webdriver:false` + 12-core CPU check
 - Font list, audio hardware, network connection type
 
-**Important:** These payloads are device/browser fingerprints, not stolen passwords. Credential theft from Chrome's `Login Data` SQLite file happens as a local disk read and would not appear in this network capture.
+Important: These payloads are device/browser fingerprints, not stolen passwords. Credential theft from Chrome's `Login Data` SQLite file happens as a local disk read and would not appear in this network capture.
 
 ![Chrome Decoded Fingerprint](Decode%20and%20exfiltration%20evidence/40_chrome_decode_canvas_network.png)
 
@@ -195,7 +195,7 @@ Because this build of Lumma skipped HTTPS, both payloads were in cleartext. Deco
 | T1016 | System Network Configuration Discovery | Connection type/speed in payload |
 | T1033 | System Owner/User Discovery | Bot ID tags victim across sessions |
 
-Tactics **not** claimed — no packet evidence: Initial Access, Execution, Persistence, Lateral Movement.
+Tactics not claimed — no packet evidence: Initial Access, Execution, Persistence, Lateral Movement.
 
 ---
 
@@ -227,14 +227,14 @@ sudo snort -r pcaps/2026-01-31-traffic-analysis-exercise.pcap -c /etc/snort/snor
 | 1000001 | Lumma C2 IP | 45 | Noisy — fires on every TCP handshake |
 | 1000002 | Lumma Domain | 6 | Clean — domain match only |
 | 1000003 | Lumma URI | 6 | Clean — beacon URI match |
-| 1000004 | Lumma POST Exfil | **2** | Precise — Chrome + Edge exfil events |
-| **TOTAL** | | **59** | **Detection confirmed** |
+| 1000004 | Lumma POST Exfil | 2 | Precise — Chrome + Edge exfil events |
+| TOTAL | | 59 | Detection confirmed |
 
 ![Snort Alert Count](snort%20rules/total%20alert%20counts.png)
 
-**Known weaknesses:**
-- **Rule 1000001:** fires on every SYN/ACK — fix with `flow:to_server,established;` + `content:"whitepepper.su"` (see `lumma_improved.rules`)
-- **Rule 1000004:** `content:"POST"` matches any POST on port 80 — scope with host content check
+Known weaknesses:
+- Rule 1000001: fires on every SYN/ACK — fix with `flow:to_server,established;` + `content:"whitepepper.su"` (see `lumma_improved.rules`)
+- Rule 1000004: `content:"POST"` matches any POST on port 80 — scope with host content check
 
 ---
 

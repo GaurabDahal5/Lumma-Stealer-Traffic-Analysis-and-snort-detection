@@ -4,14 +4,14 @@
 
 | Field | Value |
 |---|---|
-| **Analyst** | Gaurab Dahal |
-| **Date** | july 2026 |
-| **Malware** | Lumma Stealer 
-| **Source** | [malware-traffic-analysis.net](https://malware-traffic-analysis.net) |
-| **Tools Used** | Wireshark, tshark, tcpdump, strings, Snort 2.9.15, Python 3, Ubuntu 22.04 |
-| **Result** | Detection Confirmed — 59 Snort alerts generated |
+| Analyst | Gaurab Dahal |
+| Date | july 2026 |
+| Malware | Lumma Stealer 
+| Source | [malware-traffic-analysis.net](https://malware-traffic-analysis.net) |
+| Tools Used | Wireshark, tshark, tcpdump, strings, Snort 2.9.15, Python 3, Ubuntu 22.04 |
+| Result | Detection Confirmed — 59 Snort alerts generated |
 
-> **Note:** The raw PCAP is not included in this repository. Machine-readable IOCs are in [`../data/`](../data/). Snort rules are in [`../rules/`](../rules/).
+> Note: The raw PCAP is not included in this repository. Machine-readable IOCs are in [`../data/`](../data/). Snort rules are in [`../rules/`](../rules/).
 
 ---
 
@@ -23,7 +23,7 @@ Two fingerprint uploads occurred **7 seconds apart**: Chrome (8,023 bytes) then 
 
 This Lumma build did not use HTTPS, so exfiltration payloads were visible in cleartext. Decoded data showed browser/hardware fingerprints and anti-sandbox checks (`webdriver:false`, 12-core CPU validation), not stolen passwords in the network capture.
 
-**Key outcomes:** one infected host, one confirmed C2 domain, two exfiltration events, eight MITRE ATT&CK techniques with packet evidence, four Snort rules validated, **59 alerts** on PCAP replay.
+Key outcomes: one infected host, one confirmed C2 domain, two exfiltration events, eight MITRE ATT&CK techniques with packet evidence, four Snort rules validated, 59 alerts on PCAP replay.
 
 ---
 
@@ -128,7 +128,7 @@ python3 scripts/decode_payload.py set_agentEdgeact=log* -o analysis/edge_decoded
 | Screen | 1920×1080, 24-bit | 1920×1080, 24-bit | T1082 |
 | Upload Size | 8,023 bytes | 7,975 bytes | T1041 |
 
-**Important:** These payloads are **browser/device fingerprints**, not credential dumps. Credential theft from `Login Data` SQLite files occurs locally and would not appear in this network capture.
+Important: These payloads are browser/device fingerprints, not credential dumps. Credential theft from `Login Data` SQLite files occurs locally and would not appear in this network capture.
 
 **Evidence:** [`../Decode and exfiltration evidence/`](../Decode%20and%20exfiltration%20evidence/)
 
@@ -149,7 +149,7 @@ Only techniques with direct packet/payload evidence are claimed.
 | Discovery | T1016 | System Network Configuration Discovery | Network type/speed in payload |
 | Discovery | T1033 | System Owner/User Discovery | Bot ID tags victim across sessions |
 
-**Not claimed** (no evidence in this capture): Initial Access, Execution, Persistence, Lateral Movement.
+Not claimed (no evidence in this capture): Initial Access, Execution, Persistence, Lateral Movement.
 
 ---
 
