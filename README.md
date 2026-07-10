@@ -1,4 +1,4 @@
-# Lumma Stealer — PCAP Analysis & Snort IDS Detection
+# Lumma stealer traffic analysis and snort detection
 
 **SOC Portfolio Project | Analyst: Gaurab Dahal | January 2026**
 

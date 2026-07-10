@@ -1,13 +1,12 @@
 # SOC Incident Response Report
 
-## Lumma Stealer — PCAP Analysis, Snort Detection, MITRE ATT&CK Mapping
+## Lumma Stealer traffic analysis and snort detection
 
 | Field | Value |
 |---|---|
 | **Analyst** | Gaurab Dahal |
-| **Date** | January 2026 |
-| **Malware** | Lumma Stealer — Infostealer-as-a-Service |
-| **PCAP File** | `2026-01-31-traffic-analysis-exercise.pcap` |
+| **Date** | july 2026 |
+| **Malware** | Lumma Stealer 
 | **Source** | [malware-traffic-analysis.net](https://malware-traffic-analysis.net) |
 | **Tools Used** | Wireshark, tshark, tcpdump, strings, Snort 2.9.15, Python 3, Ubuntu 22.04 |
 | **Result** | Detection Confirmed — 59 Snort alerts generated |
