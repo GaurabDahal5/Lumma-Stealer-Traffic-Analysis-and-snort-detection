@@ -317,6 +317,5 @@ All 33 screenshots are cataloged in [`docs/EVIDENCE_INDEX.md`](docs/EVIDENCE_IND
 
 ---
 
-*This project was completed as part of SOC analyst preparation. PCAP source: [malware-traffic-analysis.net](https://malware-traffic-analysis.net)*   L u m m a - S t e a l e r - T r a f f i c - A n a l y s i s - a n d - s n o r t - d e t e c t i o n 
- 
- 
+This project was completed as part of SOC analyst preparation. PCAP source: [malware-traffic-analysis.net](https://malware-traffic-analysis.net/).
+
