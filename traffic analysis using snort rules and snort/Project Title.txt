@@ -1,0 +1,52 @@
+Project Title
+Detection of Malware Network Traffic Using PCAP Analysis, Tshark, and Custom Snort IDS Rules
+
+Project Objective
+
+The goal is to analyze malware network traffic captured in PCAP format, extract Indicators of Compromise (IOCs), and develop custom Snort rules to detect malicious communications.
+
+Instead of executing malware, I am analyzing historical malware traffic downloaded from repositories such as Malware-Traffic-Analysis.net.
+
+Workflow
+
+   Malware-Traffic-Analysis.net
+                         │
+                         ▼
+                  Download PCAP File
+                         │
+                         ▼
+                Ubuntu Investigation Lab
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+        ▼                ▼                ▼
+     tshark          tcpdump         strings
+        │                │
+        └────────────────┘
+                IOC Extraction
+                         │
+                         ▼
+             Threat Intelligence Analysis
+                         │
+                         ▼
+           Custom Snort Rule Development
+                         │
+                         ▼
+          Replay Same PCAP Through Snort
+                         │
+                         ▼
+                Alert Generation
+                         │
+                         ▼
+             Incident Response Report
+
+Deliverables in This Repository
+
+- reports/FINAL_REPORT.md  — Full incident response report (Markdown)
+- reports/final.docx       — Same report in Word format
+- rules/lumma.rules        — Original Snort detection rules
+- rules/lumma_improved.rules — Tuned rules with reduced false positives
+- scripts/decode_payload.py — Python tool to decode exfiltration payloads
+- data/iocs.json / iocs.csv — Machine-readable IOC exports
+- data/detection_results.csv — Snort alert breakdown by SID
+- docs/EVIDENCE_INDEX.md   — Catalog of all screenshot evidence

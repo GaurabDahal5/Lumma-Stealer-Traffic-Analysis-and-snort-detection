@@ -1,0 +1,26 @@
+# Lumma Stealer Detection Rules (Improved — reduced false positives)
+# Analyst: Gaurab Dahal | Date: January 2026
+# Replaces noisy SID 1000001 and overly broad SID 1000004 from lumma.rules
+
+alert tcp any any -> 153.92.1.49 80 (
+    msg:"Lumma C2 - Confirmed Communication";
+    flow:to_server,established;
+    content:"whitepepper.su";
+    classtype:trojan-activity;
+    priority:1;
+    metadata:author Gaurab, created_at 2026-01-28;
+    sid:1000001; rev:2;
+)
+
+alert tcp any any -> any 80 (msg:"Lumma Domain"; content:"whitepepper.su"; sid:1000002; rev:1;)
+alert tcp any any -> any 80 (msg:"Lumma URI"; content:"/api/set_agent"; sid:1000003; rev:1;)
+
+alert tcp any any -> any 80 (
+    msg:"Lumma POST Exfiltration";
+    flow:to_server,established;
+    content:"POST";
+    content:"whitepepper.su";
+    classtype:trojan-activity;
+    priority:1;
+    sid:1000004; rev:2;
+)

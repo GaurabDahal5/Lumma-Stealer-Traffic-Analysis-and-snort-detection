@@ -1,0 +1,17 @@
+type,value,source,notes
+Victim IP,10.1.21.58,DHCP + HTTP,
+Victim MAC,00:04:c1:be:8c:d4,Ethernet / DHCP,
+Hostname,DESKTOP-ES9F3ML,DHCP Option 12,
+Username,gwyatt,Kerberos AS-REQ,
+Full Name,Gabriel Wyatt,SAMR QueryUserInfo,
+Domain,WIN11OFFICE,Kerberos,
+C2 Domain,whitepepper.su,DNS + HTTP Host header,.su TLD — common in Eastern European malware infrastructure
+C2 IP,153.92.1.49,DNS response + HTTP destination,
+C2 URI,/api/set_agent,HTTP request URI,
+Bot ID,3BF67EC05320C5729578BE4C0ADF174C,HTTP URI parameter,
+Auth Token,842e2802df0f0a06b4ed51f12f4387e761523b,HTTP URI parameter,
+Chrome Exfil Size,8023 bytes,Wireshark HTTP object,Packet 24601
+Edge Exfil Size,7975 bytes,Wireshark HTTP object,Packet 25286
+Browser Versions,Chrome/144.0.0.0 + Edge/144.0.0.0,HTTP User-Agent,
+GPU,AMD Radeon R9 200 (Direct3D11),Decoded Chrome POST payload,
+Malware Family,Lumma Stealer,MITRE procedure match,Infostealer-as-a-Service

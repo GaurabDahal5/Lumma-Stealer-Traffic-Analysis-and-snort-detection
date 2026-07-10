@@ -1,0 +1,65 @@
+{
+  "report_metadata": {
+    "analyst": "Gaurab Dahal",
+    "date": "2026-01",
+    "malware_family": "Lumma Stealer",
+    "pcap_file": "2026-01-31-traffic-analysis-exercise.pcap",
+    "pcap_source": "https://malware-traffic-analysis.net",
+    "pcap_included": false,
+    "detection_result": "Confirmed — 59 Snort alerts on PCAP replay"
+  },
+  "victim": {
+    "ip_address": "10.1.21.58",
+    "mac_address": "00:04:c1:be:8c:d4",
+    "hostname": "DESKTOP-ES9F3ML",
+    "username": "gwyatt",
+    "full_name": "Gabriel Wyatt",
+    "domain": "WIN11OFFICE",
+    "operating_system": "Windows NT 10.0 x64",
+    "last_logon": "2026-01-28"
+  },
+  "c2_infrastructure": {
+    "domain": "whitepepper.su",
+    "ip": "153.92.1.49",
+    "uri": "/api/set_agent",
+    "protocol": "HTTP",
+    "port": 80,
+    "bot_id": "3BF67EC05320C5729578BE4C0ADF174C",
+    "auth_token": "842e2802df0f0a06b4ed51f12f4387e761523b"
+  },
+  "exfiltration_events": [
+    {
+      "browser": "Chrome",
+      "timestamp_utc": "2026-01-28T04:50:40.196368Z",
+      "packet_number": 24601,
+      "size_bytes": 8023,
+      "user_agent": "Chrome/144.0.0.0"
+    },
+    {
+      "browser": "Edge",
+      "timestamp_utc": "2026-01-28T04:50:47.462000Z",
+      "packet_number": 25286,
+      "size_bytes": 7975,
+      "user_agent": "Chrome/144 + Edg/144.0.0.0"
+    }
+  ],
+  "mitre_attack": [
+    {"id": "T1071.001", "technique": "Application Layer Protocol: Web", "tactic": "Command and Control"},
+    {"id": "T1041", "technique": "Exfiltration Over C2 Channel", "tactic": "Exfiltration"},
+    {"id": "T1555.003", "technique": "Credentials from Web Browsers", "tactic": "Credential Access"},
+    {"id": "T1082", "technique": "System Information Discovery", "tactic": "Discovery"},
+    {"id": "T1497.001", "technique": "Virtualization/Sandbox Evasion", "tactic": "Defense Evasion"},
+    {"id": "T1119", "technique": "Automated Collection", "tactic": "Collection"},
+    {"id": "T1016", "technique": "System Network Configuration Discovery", "tactic": "Discovery"},
+    {"id": "T1033", "technique": "System Owner/User Discovery", "tactic": "Discovery"}
+  ],
+  "snort_detection": {
+    "total_alerts": 59,
+    "rules": [
+      {"sid": 1000001, "name": "Lumma C2 IP", "alerts": 45, "assessment": "Noisy"},
+      {"sid": 1000002, "name": "Lumma Domain", "alerts": 6, "assessment": "Clean"},
+      {"sid": 1000003, "name": "Lumma URI", "alerts": 6, "assessment": "Clean"},
+      {"sid": 1000004, "name": "Lumma POST", "alerts": 2, "assessment": "Precise"}
+    ]
+  }
+}

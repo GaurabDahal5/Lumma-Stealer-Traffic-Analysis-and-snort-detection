@@ -1,0 +1,9 @@
+# Lumma Stealer Detection Rules
+# Analyst: Gaurab Dahal | Date: January 2026
+# PCAP: 2026-01-31-traffic-analysis-exercise.pcap
+# Include in snort.conf: include $RULE_PATH/lumma.rules
+
+alert tcp any any -> 153.92.1.49 80 (msg:"Lumma C2 IP"; sid:1000001; rev:1;)
+alert tcp any any -> any 80 (msg:"Lumma Domain"; content:"whitepepper.su"; sid:1000002; rev:1;)
+alert tcp any any -> any 80 (msg:"Lumma URI"; content:"/api/set_agent"; sid:1000003; rev:1;)
+alert tcp any any -> any 80 (msg:"Lumma POST"; content:"POST"; sid:1000004; rev:1;)
