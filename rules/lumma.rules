@@ -1,5 +1,5 @@
 # Lumma Stealer Detection Rules
-# Analyst: Gaurab Dahal | Date: January 2026
+# Analyst: Gaurab Dahal | Date: july 2026
 # PCAP: 2026-01-31-traffic-analysis-exercise.pcap
 # Include in snort.conf: include $RULE_PATH/lumma.rules
 

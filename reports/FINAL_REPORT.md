@@ -17,19 +17,19 @@
 
 ## 1. Executive Summary
 
-A Windows 11 machine on the `WIN11OFFICE` network was infected with Lumma Stealer — a commodity infostealer rented on cybercrime forums as a subscription service. Once active, the malware communicated over plain HTTP to `whitepepper.su` (`153.92.1.49`), a C2 server using the `.su` (Soviet Union) TLD, which is cheap and lightly regulated.
+A Windows 11 host on the `WIN11OFFICE` network was infected with Lumma Stealer. The malware reached out over plain HTTP to `whitepepper.su` (`153.92.1.49`), and the traffic was easy to follow in the capture.
 
-Two fingerprint uploads occurred **7 seconds apart**: Chrome (8,023 bytes) then Edge (7,975 bytes). That interval is too fast for manual browser switching — consistent with automated collection across installed browsers.
+The clearest part of the activity was the data upload. Two browser fingerprint payloads were sent about 7 seconds apart, first from Chrome and then from Edge. That timing looked automated rather than something a person would have done by hand.
 
-This Lumma build did not use HTTPS, so exfiltration payloads were visible in cleartext. Decoded data showed browser/hardware fingerprints and anti-sandbox checks (`webdriver:false`, 12-core CPU validation), not stolen passwords in the network capture.
+Because the traffic was not encrypted, the exfiltration was visible in cleartext. The decoded content showed browser and hardware fingerprint data, along with anti-sandbox checks such as `webdriver:false` and a 12-core CPU check. I did not see passwords or credential dumps in this capture.
 
-Key outcomes: one infected host, one confirmed C2 domain, two exfiltration events, eight MITRE ATT&CK techniques with packet evidence, four Snort rules validated, 59 alerts on PCAP replay.
+The investigation confirmed one infected host, one C2 domain, two exfiltration events, and 59 Snort alerts when the PCAP was replayed.
 
 ---
 
 ## 2. Victim Identification
 
-Four independent protocols corroborate the victim identity:
+I confirmed the victim host from several different sources:
 
 | Field | Value | Found Via | Command / Filter |
 |---|---|---|---|
@@ -50,7 +50,7 @@ Four independent protocols corroborate the victim identity:
 
 | IOC Type | Value | Notes |
 |---|---|---|
-| C2 Domain | whitepepper.su | `.su` TLD — common in Eastern European malware infrastructure |
+| C2 Domain | whitepepper.su | `.su` TLD, which is often used for malware infrastructure |
 | C2 IP | 153.92.1.49 | Confirmed via DNS and HTTP destination |
 | C2 URI | /api/set_agent | Bot check-in and data upload path |
 | Bot ID | 3BF67EC05320C5729578BE4C0ADF174C | Victim tag sent on every beacon |
@@ -63,7 +63,7 @@ Four independent protocols corroborate the victim identity:
 
 ## 4. Attack Timeline
 
-All timestamps from PCAP replay through Snort.
+The timings below come from replaying the PCAP through Snort.
 
 | Time (UTC) | Event | Evidence | MITRE Tactic |
 |---|---|---|---|
@@ -136,7 +136,7 @@ Important: These payloads are browser/device fingerprints, not credential dumps.
 
 ## 7. MITRE ATT&CK Mapping
 
-Only techniques with direct packet/payload evidence are claimed.
+I only mapped techniques where the packet capture and payloads provided direct evidence.
 
 | Tactic | ID | Technique | Evidence |
 |---|---|---|---|
@@ -208,7 +208,7 @@ Improved rules are in [`../rules/lumma_improved.rules`](../rules/lumma_improved.
 
 ## 11. Complete IOC Table
 
-Export-ready IOCs: [`../data/iocs.csv`](../data/iocs.csv) and [`../data/iocs.json`](../data/iocs.json)
+IOC data for export is in [`../data/iocs.csv`](../data/iocs.csv) and [`../data/iocs.json`](../data/iocs.json)
 
 | Type | Value |
 |---|---|
@@ -229,12 +229,12 @@ Export-ready IOCs: [`../data/iocs.csv`](../data/iocs.csv) and [`../data/iocs.jso
 
 ## 12. Recommendations
 
-1. **Block IOCs** at firewall/proxy: `whitepepper.su`, `153.92.1.49`
-2. **Deploy improved Snort rules** from `rules/lumma_improved.rules`
-3. **Isolate** host `DESKTOP-ES9F3ML` (10.1.21.58) and image for forensic analysis
-4. **Reset credentials** for user `gwyatt` — local credential theft may have occurred off-wire
-5. **Hunt** for Lumma persistence and additional C2 channels not visible in this capture
+1. **Block the IOCs** at the firewall or proxy: `whitepepper.su`, `153.92.1.49`
+2. **Deploy the improved Snort rules** from `rules/lumma_improved.rules`
+3. **Isolate** the host `DESKTOP-ES9F3ML` (10.1.21.58) and preserve it for forensic review
+4. **Reset the credentials** for `gwyatt`. I did not see credentials on the wire, but the host may still have been affected locally
+5. **Look for persistence** and any additional C2 channels that were not visible in this capture
 
 ---
 
-*Report prepared as part of SOC analyst portfolio work. PCAP source: malware-traffic-analysis.net*
+*Report prepared for portfolio use. PCAP source: malware-traffic-analysis.net*

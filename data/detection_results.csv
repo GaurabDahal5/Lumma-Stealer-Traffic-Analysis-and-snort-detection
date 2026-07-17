@@ -3,4 +3,4 @@ sid,rule_name,alert_count,assessment,notes
 1000002,Lumma Domain,6,Clean,Domain match only
 1000003,Lumma URI,6,Clean,Beacon URI /api/set_agent
 1000004,Lumma POST,2,Precise,Chrome + Edge exfiltration events
-,TOTAL,59,Confirmed,All rules fired as expected on PCAP replay
+TOTAL,59,Confirmed,All rules fired as expected on PCAP replay

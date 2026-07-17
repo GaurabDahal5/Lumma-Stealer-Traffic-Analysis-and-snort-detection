@@ -1,6 +1,6 @@
 # Evidence Screenshot Index
 
-Every PNG in this repository, mapped to the analysis step it supports.
+This index maps the screenshots in the repository to the analysis step they support.
 
 ---
 
